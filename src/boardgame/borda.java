@@ -31,4 +31,9 @@ public class Borda {
 		return pieces[position.getRow()][position.getColumn()];
 		
 	}
+	
+	public void PlacePiece(Peça piece, Posiçao position) {
+		pieces[position.getRow()][position.getColumn()] = piece;
+		piece.position = position;
+	}
 }
