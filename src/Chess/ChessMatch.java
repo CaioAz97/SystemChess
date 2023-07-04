@@ -25,15 +25,14 @@ public class ChessMatch {
 		return mat;
 	}
 	
+	private void placeNewPiece(char column, int row, ChessPiece piece) {
+		board.placePiece(piece, new ChessPosition(column, row).toPosition());
+	}
+	
+	
 	private void initialSetup() {
-		board.PlacePiece(new Torre(board, Color.WHITE), new Posiçao(0, 0));
-		board.PlacePiece(new Torre(board, Color.BLACK), new Posiçao(7, 0));
-		board.PlacePiece(new Torre(board, Color.BLACK), new Posiçao(7, 7));
-		board.PlacePiece(new Torre(board, Color.WHITE), new Posiçao(0, 7));
-		
-		board.PlacePiece(new Rei(board, Color.BLACK), new Posiçao(0,4));
-		board.PlacePiece(new Rei(board, Color.WHITE), new Posiçao(7,4));
-		
-		
+		placeNewPiece('B', 6, new Torre(board, Color.WHITE));
+		placeNewPiece('E', 8, new Rei(board, Color.BLACK));
+		placeNewPiece('E', 1, new Rei(board, Color.WHITE));
 	}
 }

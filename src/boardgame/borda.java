@@ -37,7 +37,7 @@ public class Borda {
 		
 	}
 	
-	public void PlacePiece(Peça piece, Posiçao position) {
+	public void placePiece(Peça piece, Posiçao position) {
 		if (thereIsAPiece(position)) {
 			throw new BoardException("There is already a piece on position " + position);
 		}
