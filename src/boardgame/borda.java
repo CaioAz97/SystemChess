@@ -25,14 +25,14 @@ public class Borda {
 	
 	public Peça piece (int row, int column) {
 		if (!positionExists(row, column)) {
-			throw new BoardException("Position not on the board");
+			throw new BoardException("Posição fora do tabuleiro");
 		}
 		return pieces[row][column];
 	}
 	
 	public Peça piece (Posiçao position) {
 		if (!positionExists(position)) {
-			throw new BoardException("Position not on the board");
+			throw new BoardException("Posição fora do tabuleiro");
 		}
 		return pieces[position.getRow()][position.getColumn()];
 		
@@ -40,7 +40,7 @@ public class Borda {
 	
 	public void placePiece(Peça piece, Posiçao position) {
 		if (thereIsAPiece(position)) {
-			throw new BoardException("There is already a piece on position " + position);
+			throw new BoardException("Já existe uma peça em posição " + position);
 		}
 		pieces[position.getRow()][position.getColumn()] = piece;
 		piece.position = position;
@@ -68,7 +68,7 @@ public class Borda {
 	
 	public boolean thereIsAPiece(Posiçao position) {	
 		if (!positionExists(position)) {
-			throw new BoardException("Position not on the board");
+			throw new BoardException("Posição fora do tabuleiro");
 	}
 		return piece(position) != null;
 		
