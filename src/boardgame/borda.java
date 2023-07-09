@@ -14,6 +14,7 @@ public class Borda {
 		this.columns = columns;
 		pieces = new Peça[rows][columns];
 	}
+	
 	public int getRows() {
 		return rows;
 	}
@@ -49,7 +50,7 @@ public class Borda {
 		if(!positionExists(position)) {
 			throw new BoardException("Posição não está no tabuleiro");
 		}
-		if(piece(position)== null) {
+		if(piece(position) == null) {
 			return null;
 		}
 		Peça aux = piece(position);
@@ -60,7 +61,7 @@ public class Borda {
 
 	private  boolean positionExists(int row, int column) {
 		return row >=0 && row < rows && column >=0 && column < columns;
-}
+	}
 	public boolean positionExists(Posiçao position) {
 		return positionExists(position.getRow(), position.getColumn());
 	}
