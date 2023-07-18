@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import Chess.pieces.Bispo;
 import Chess.pieces.Peao;
 import Chess.pieces.Rei;
 import Chess.pieces.Torre;
@@ -201,7 +202,9 @@ public class ChessMatch {
 	
 	private void initialSetup() {
 			placeNewPiece('A', 1, new Torre(board, Color.WHITE));
+			placeNewPiece('C', 1, new Bispo(board, Color.WHITE));
 			placeNewPiece('E', 1, new Rei(board, Color.WHITE));
+			placeNewPiece('F', 1, new Bispo(board, Color.WHITE));
 			placeNewPiece('H', 1, new Torre(board, Color.WHITE));
 		  	placeNewPiece('A', 2, new Peao(board, Color.WHITE));
 	        placeNewPiece('B', 2, new Peao(board, Color.WHITE));
@@ -213,7 +216,9 @@ public class ChessMatch {
 	        placeNewPiece('H', 2, new Peao(board, Color.WHITE));
 	        
 	        placeNewPiece('A', 8, new Torre(board, Color.BLACK));
+	        placeNewPiece('C', 8, new Bispo(board, Color.BLACK));
 	        placeNewPiece('E', 8, new Rei(board, Color.BLACK));
+	        placeNewPiece('F', 8, new Bispo(board, Color.BLACK));
 	        placeNewPiece('H', 8, new Torre(board, Color.BLACK));
 	        placeNewPiece('A', 7, new Peao(board, Color.BLACK));
 	        placeNewPiece('B', 7, new Peao(board, Color.BLACK));
