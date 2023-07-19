@@ -104,6 +104,24 @@ public class ChessMatch {
 			capturedPieces.add(capturedPiece);
 		}
 			
+		//#ESPECIAL MOVEMENT CASTLING KINGSIDE.
+		if(p instanceof Rei && target.getColumn() == source.getColumn() + 2) {
+			Posiçao origemT = new Posiçao(source.getRow(), source.getColumn() + 3);
+			Posiçao destinoT = new Posiçao(source.getRow(), source.getColumn() + 1);
+			ChessPiece torre = (ChessPiece)board.removePiece(origemT);
+			board.placePiece(torre, destinoT);
+			torre.increaseMoveCount();
+		}
+		
+		//#ESPECIAL MOVEMENT CASTLING QUEENSIDE.
+		if(p instanceof Rei && target.getColumn() == source.getColumn() - 2) {
+			Posiçao origemT = new Posiçao(source.getRow(), source.getColumn() - 4);
+			Posiçao destinoT = new Posiçao(source.getRow(), source.getColumn() - 1);
+			ChessPiece torre = (ChessPiece)board.removePiece(origemT);
+			board.placePiece(torre, destinoT);
+			torre.increaseMoveCount();
+		}
+		
 		return capturedPiece;
 	}
 	
@@ -117,6 +135,24 @@ public class ChessMatch {
 			capturedPieces.remove(capturedPiece);
 			piecesOnTheBoard.add(capturedPiece);
 		}
+		
+		//#ESPECIAL MOVEMENT CASTLING KINGSIDE.
+				if(p instanceof Rei && target.getColumn() == source.getColumn() + 2) {
+					Posiçao origemT = new Posiçao(source.getRow(), source.getColumn() + 3);
+					Posiçao destinoT = new Posiçao(source.getRow(), source.getColumn() + 1);
+					ChessPiece torre = (ChessPiece)board.removePiece(destinoT);
+					board.placePiece(torre, origemT);
+					torre.decreaseMoveCount();
+				}
+				
+				//#ESPECIAL MOVEMENT CASTLING QUEENSIDE.
+				if(p instanceof Rei && target.getColumn() == source.getColumn() - 2) {
+					Posiçao origemT = new Posiçao(source.getRow(), source.getColumn() - 4);
+					Posiçao destinoT = new Posiçao(source.getRow(), source.getColumn() - 1);
+					ChessPiece torre = (ChessPiece)board.removePiece(destinoT);
+					board.placePiece(torre, origemT);
+					torre.decreaseMoveCount();
+				}		
 	}
 
 	private void validateSourcePosition(Posiçao position) {
@@ -130,6 +166,7 @@ public class ChessMatch {
 			throw new ChessException("não há movimentos possíveis para a peça escolhida");
 			
 		}
+	
 	}
 	
 	
@@ -207,7 +244,7 @@ public class ChessMatch {
 			placeNewPiece('B', 1, new Cavalo(board, Color.WHITE));
 			placeNewPiece('C', 1, new Bispo(board, Color.WHITE));
 			placeNewPiece('D', 1, new Rainha(board, Color.WHITE));
-			placeNewPiece('E', 1, new Rei(board, Color.WHITE));
+			placeNewPiece('E', 1, new Rei(board, Color.WHITE, this));
 			placeNewPiece('F', 1, new Bispo(board, Color.WHITE));
 			placeNewPiece('G', 1, new Cavalo(board, Color.WHITE));
 			placeNewPiece('H', 1, new Torre(board, Color.WHITE));
@@ -224,7 +261,7 @@ public class ChessMatch {
 	        placeNewPiece('B', 8, new Cavalo(board, Color.BLACK));
 	        placeNewPiece('C', 8, new Bispo(board, Color.BLACK));
 	        placeNewPiece('D', 8, new Rainha(board, Color.BLACK));
-	        placeNewPiece('E', 8, new Rei(board, Color.BLACK));
+	        placeNewPiece('E', 8, new Rei(board, Color.BLACK, this));
 	        placeNewPiece('F', 8, new Bispo(board, Color.BLACK));
 	        placeNewPiece('G', 8, new Cavalo(board, Color.BLACK));
 	        placeNewPiece('H', 8, new Torre(board, Color.BLACK));

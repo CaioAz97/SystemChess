@@ -1,5 +1,6 @@
 package Chess.pieces;
 
+import Chess.ChessMatch;
 import Chess.ChessPiece;
 import Chess.Color;
 import boardgame.Borda;
@@ -7,8 +8,12 @@ import boardgame.Posiçao;
 
 public class Rei extends ChessPiece {
 
-	public Rei(Borda borda, Color color) {
+	private ChessMatch chessMatch;
+	
+	
+	public Rei(Borda borda, Color color, ChessMatch chessMatch) {
 		super(borda, color);
+		this.chessMatch = chessMatch;
 		
 	}
 
@@ -22,6 +27,10 @@ public class Rei extends ChessPiece {
 		return p == null || p.getColor() != getColor();
 	}
 	
+	private boolean testTorreRoque(Posiçao position) {
+		ChessPiece p = (ChessPiece)getBorda().piece(position);
+		return p != null && p instanceof Torre && p.getColor() == getColor() && p.getMoveCount() == 0;
+	}
 	
 	@Override
 	public boolean[][] possibleMoves() {
@@ -76,6 +85,30 @@ public class Rei extends ChessPiece {
 		if(getBorda().positionExists(p) && canMoves(p)) {
 			mat[p.getRow()][p.getColumn()] = true;
 		}
+		
+		// #Movement Especial Castling.
+		if(getMoveCount() == 0 && !chessMatch.getCheck()) {
+			//#Movement Especial Castling king side.
+			Posiçao posT1 = new Posiçao(position.getRow(),position.getColumn() + 3);
+			if(testTorreRoque(posT1)) {
+				Posiçao p1 = new Posiçao(position.getRow(), position.getColumn() + 1);
+				Posiçao p2 = new Posiçao(position.getRow(), position.getColumn() + 2);
+				if(getBorda().piece(p1) == null && getBorda().piece(p2) == null) {
+					mat[position.getRow()][position.getColumn() + 2] = true;
+				}
+			}
+			//#Movement Especial Castling Queen Side.
+			Posiçao posT2 = new Posiçao(position.getRow(),position.getColumn() - 4);
+			if(testTorreRoque(posT1)) {
+				Posiçao p1 = new Posiçao(position.getRow(), position.getColumn() - 1);
+				Posiçao p2 = new Posiçao(position.getRow(), position.getColumn() - 2);
+				Posiçao p3 = new Posiçao(position.getRow(), position.getColumn() - 3);
+				if(getBorda().piece(p1) == null && getBorda().piece(p2) == null && getBorda().piece(p3) == null) {
+					mat[position.getRow()][position.getColumn() -2] = true;
+				}	
+		}
+}
+		
 		return mat;
 	}
 
