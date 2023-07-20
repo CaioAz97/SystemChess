@@ -97,7 +97,6 @@ public class Rei extends ChessPiece {
 					mat[position.getRow()][position.getColumn() + 2] = true;
 				}
 			}
-			//#Movement Especial Castling Queen Side.
 			Posiçao posT2 = new Posiçao(position.getRow(),position.getColumn() - 4);
 			if(testTorreRoque(posT1)) {
 				Posiçao p1 = new Posiçao(position.getRow(), position.getColumn() - 1);
